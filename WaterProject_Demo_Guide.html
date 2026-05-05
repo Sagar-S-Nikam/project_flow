@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Water Quality Monitoring — Complete Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#1a202c;font-size:13px;line-height:1.8;}
+.page{max-width:950px;margin:0 auto;background:white;}
+
+/* COVER */
+.cover{background:linear-gradient(135deg,#0c1445 0%,#1a56db 60%,#0e7490 100%);color:white;padding:55px 50px;text-align:center;}
+.cover .badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 18px;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+.cover h1{font-size:36px;font-weight:800;line-height:1.2;margin-bottom:12px;}
+.cover p{font-size:14px;opacity:0.85;max-width:560px;margin:0 auto 24px;}
+.cover .tags{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+.cover .tag{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:600;}
+
+/* PART HEADER */
+.part-header{background:linear-gradient(90deg,#0c1445,#1a56db);color:white;padding:20px 50px;display:flex;align-items:center;gap:16px;}
+.part-header .pnum{background:rgba(255,255,255,0.2);width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;}
+.part-header h2{font-size:18px;font-weight:800;}
+.part-header p{font-size:12px;opacity:0.8;margin:2px 0 0;}
+
+/* SECTION */
+.section{padding:30px 50px;border-bottom:2px solid #f1f5f9;}
+.section:last-child{border-bottom:none;}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.sec-num{background:linear-gradient(135deg,#1a56db,#0e7490);color:white;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
+.sec-head h3{font-size:17px;font-weight:800;color:#0c1445;}
+p{margin-bottom:10px;color:#374151;}
+
+/* CONCEPT BOX */
+.concept{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 18px;margin:12px 0;}
+.concept .ctitle{font-weight:800;color:#0c1445;font-size:13px;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.concept p{margin:0;font-size:12px;color:#475569;}
+
+/* ANALOGY BOX */
+.analogy{background:linear-gradient(135deg,#fff7ed,#fffbeb);border-left:4px solid #f59e0b;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;}
+.analogy .alabel{font-size:10px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.analogy p{color:#78350f;font-size:12px;margin:0;}
+
+/* CODE */
+.code-wrap{margin:10px 0 16px;}
+.code-label{background:#1e3a5f;color:#94a3b8;font-size:10px;font-family:'Fira Code',monospace;padding:5px 14px;border-radius:8px 8px 0 0;letter-spacing:1px;}
+pre{background:#0f172a;color:#e2e8f0;font-family:'Fira Code',monospace;font-size:11px;line-height:1.7;padding:14px 16px;border-radius:0 0 8px 8px;overflow-x:auto;white-space:pre;}
+.kw{color:#7dd3fc;}.an{color:#fbbf24;}.str{color:#86efac;}.cm{color:#6b7280;font-style:italic;}.cl{color:#c084fc;}.mt{color:#f9a8d4;}.nm{color:#fb923c;}
+
+/* FILE PATH */
+.filepath{background:#0f172a;color:#38bdf8;font-family:'Fira Code',monospace;font-size:10px;padding:5px 12px;border-radius:5px;margin:8px 0 2px;display:inline-block;}
+
+/* FLOW */
+.flow{display:flex;flex-direction:column;gap:0;margin:14px 0;}
+.flow-step{display:flex;gap:16px;position:relative;}
+.flow-step:not(:last-child)::after{content:'';position:absolute;left:17px;top:38px;bottom:0;width:2px;background:#e2e8f0;}
+.dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;margin-top:2px;z-index:1;}
+.fc{padding-bottom:18px;flex:1;}
+.fc strong{font-size:13px;color:#0c1445;display:block;margin-bottom:3px;}
+.fc span{font-size:12px;color:#64748b;}
+.fc .ffile{font-family:'Fira Code',monospace;font-size:10px;background:#f1f5f9;color:#1a56db;padding:1px 7px;border-radius:4px;margin-top:4px;display:inline-block;}
+.d1{background:#dbeafe;color:#1d4ed8;}.d2{background:#dcfce7;color:#16a34a;}.d3{background:#f3e8ff;color:#7c3aed;}.d4{background:#ffedd5;color:#ea580c;}.d5{background:#ccfbf1;color:#0f766e;}.d6{background:#fee2e2;color:#dc2626;}.d7{background:#fef9c3;color:#854d0e;}.d8{background:#fce7f3;color:#9d174d;}
+
+/* CARDS */
+.cards{display:grid;gap:12px;margin:14px 0;}
+.c2{grid-template-columns:1fr 1fr;}.c3{grid-template-columns:1fr 1fr 1fr;}.c4{grid-template-columns:1fr 1fr 1fr 1fr;}
+.card{border-radius:10px;padding:14px;border:1px solid transparent;}
+.card .ci{font-size:20px;margin-bottom:7px;}
+.card h4{font-size:12px;font-weight:700;margin-bottom:5px;}
+.card p{font-size:11px;color:#6b7280;margin:0;}
+.card.blue{background:#eff6ff;border-color:#bfdbfe;}.card.green{background:#f0fdf4;border-color:#bbf7d0;}.card.purple{background:#faf5ff;border-color:#e9d5ff;}.card.orange{background:#fff7ed;border-color:#fed7aa;}.card.teal{background:#f0fdfa;border-color:#99f6e4;}.card.red{background:#fef2f2;border-color:#fecaca;}.card.yellow{background:#fefce8;border-color:#fef08a;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px;}
+thead tr{background:#0c1445;color:white;}
+thead th{padding:9px 12px;text-align:left;font-weight:600;}
+tbody tr:nth-child(even){background:#f8fafc;}
+tbody td{padding:8px 12px;border-bottom:1px solid #e2e8f0;}
+tbody td:first-child{font-weight:600;color:#0c1445;}
+
+/* HIGHLIGHT */
+.hl{border-left:4px solid #1a56db;background:#eff6ff;padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0;font-size:12px;color:#1d4ed8;}
+.hl.green{border-color:#16a34a;background:#f0fdf4;color:#15803d;}
+.hl.orange{border-color:#ea580c;background:#fff7ed;color:#c2410c;}
+.hl.purple{border-color:#7c3aed;background:#faf5ff;color:#6d28d9;}
+
+/* FOLDER TREE */
+.tree{background:#0f172a;color:#e2e8f0;font-family:'Fira Code',monospace;font-size:11px;padding:16px 18px;border-radius:10px;margin:12px 0;line-height:2.1;}
+.tree .fo{color:#fbbf24;}.tree .fj{color:#86efac;}.tree .ft{color:#7dd3fc;}.tree .fh{color:#f9a8d4;}.tree .fc2{color:#fb923c;}.tree .co{color:#6b7280;font-style:italic;}
+
+/* FILE TABLE */
+.ftable{width:100%;border-collapse:collapse;margin:12px 0;font-size:11.5px;}
+.ftable thead tr{background:#1e3a5f;color:white;}
+.ftable thead th{padding:8px 12px;text-align:left;}
+.ftable tbody tr:nth-child(even){background:#f8fafc;}
+.ftable tbody td{padding:8px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top;}
+.ftable .fn{font-family:'Fira Code',monospace;color:#0284c7;font-size:10.5px;}
+.ftable .fd{color:#374151;}
+.ftable .fl{font-size:10px;color:#94a3b8;font-style:italic;}
+
+/* TIP */
+.tip{background:linear-gradient(135deg,#0c1445,#1a56db);color:white;border-radius:10px;padding:18px 22px;margin:12px 0;}
+.tip h4{font-size:13px;margin-bottom:9px;}
+.tip li{font-size:12px;margin-bottom:6px;opacity:0.92;margin-left:16px;}
+
+/* QA */
+.qa{margin-bottom:14px;}
+.qa-q{background:#0c1445;color:white;padding:8px 14px;border-radius:6px 6px 0 0;font-size:12px;font-weight:600;}
+.qa-a{background:#f8fafc;border:1px solid #e2e8f0;border-top:none;padding:10px 14px;border-radius:0 0 6px 6px;font-size:12px;color:#374151;}
+
+/* PAGE BREAK */
+.pb{page-break-before:always;}
+
+@media print{body{background:white;}.pb{page-break-before:always;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="badge">Complete Project Demo Guide — Beginner Friendly</div>
+  <h1>💧 Water Quality<br/>Monitoring System</h1>
+  <p>Learn all basics first → Understand the project structure → Then follow the complete flow. Everything explained in simple words for absolute beginners.</p>
+  <div class="tags">
+    <span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">MySQL</span>
+    <span class="tag">Spring Security</span><span class="tag">REST API</span><span class="tag">JPA</span>
+    <span class="tag">BCrypt</span><span class="tag">Session</span><span class="tag">Chart.js</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PART 1 — BASICS
+═══════════════════════════════════════════════════════ -->
+<div class="part-header">
+  <div class="pnum">A</div>
+  <div><h2>PART 1 — Learn the Basics First</h2><p>All technologies used in this project explained in simple words before touching any code</p></div>
+</div>
+
+<!-- 1. Web App -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">1</div><h3>What is a Web Application?</h3></div>
+  <p>A web application has 3 parts that work together:</p>
+  <div class="cards c3">
+    <div class="card blue"><div class="ci">🖥️</div><h4>Frontend</h4><p>What the user SEES in the browser. In our project: Angular running on port 4200.</p></div>
+    <div class="card green"><div class="ci">⚙️</div><h4>Backend</h4><p>The brain behind the scenes. Handles logic, processes data. In our project: Spring Boot on port 8081.</p></div>
+    <div class="card orange"><div class="ci">🗄️</div><h4>Database</h4><p>Stores everything permanently. Even after server restart, data is safe. In our project: MySQL on port 3306.</p></div>
+  </div>
+  <div class="analogy"><div class="alabel">Real World Analogy</div><p>Think of a restaurant. Frontend = the menu you see. Backend = the kitchen that cooks. Database = the storage room where food is kept.</p></div>
+</div>
+
+<!-- 2. Java/Spring Boot -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">2</div><h3>What is Java &amp; Spring Boot?</h3></div>
+  <div class="concept"><div class="ctitle">☕ Java</div><p>Java is a programming language. We use it to write the backend logic — like registering users, checking passwords, generating sensor data, saving to database.</p></div>
+  <div class="concept"><div class="ctitle">🚀 Spring Boot</div><p>Spring Boot is a framework built on top of Java. A framework is like a ready-made toolkit. Instead of building everything from scratch, Spring Boot gives us pre-built tools for making APIs, connecting to databases, handling security, etc. It also has a built-in web server (Tomcat) so you don't need to install one separately.</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>Java = the language you speak. Spring Boot = a pre-built house where you just decorate the rooms instead of building walls from scratch.</p></div>
+  <div class="concept"><div class="ctitle">📌 Important Annotations (Special Labels)</div><p><strong>@SpringBootApplication</strong> — Marks the main class. Starts the whole application.<br/><strong>@RestController</strong> — This class handles HTTP requests (like GET, POST).<br/><strong>@Service</strong> — This class contains business logic.<br/><strong>@Repository</strong> — This class talks to the database.<br/><strong>@Entity</strong> — This Java class maps to a database table.<br/><strong>@Autowired / @Bean</strong> — Spring automatically creates and provides objects (no need to write "new ClassName()" manually).</p></div>
+</div>
+
+<!-- 3. Angular -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">3</div><h3>What is Angular &amp; TypeScript?</h3></div>
+  <div class="concept"><div class="ctitle">📐 TypeScript</div><p>TypeScript is like JavaScript but with extra rules. It helps catch mistakes before the code runs. For example, it will warn you if you pass a number where a text is expected.</p></div>
+  <div class="concept"><div class="ctitle">🅰️ Angular</div><p>Angular is a frontend framework (made by Google) for building websites. It divides the website into <strong>Components</strong> — each component is one piece of the page (like the login form, the dashboard, the chart). Each component has 3 files: <strong>.ts</strong> (logic), <strong>.html</strong> (layout), <strong>.css</strong> (style).</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>Angular is like building with LEGO blocks. Each block (component) is independent. You assemble them to make the full website.</p></div>
+  <div class="cards c3">
+    <div class="card blue"><div class="ci">🧩</div><h4>Component (.ts + .html + .css)</h4><p>One screen/page of the app. E.g. Login, Dashboard, Home are all separate components.</p></div>
+    <div class="card green"><div class="ci">🔧</div><h4>Service (.ts)</h4><p>Makes HTTP calls to the backend. Auth service handles login/register. Simulator service handles pipes and sensor data.</p></div>
+    <div class="card purple"><div class="ci">🛣️</div><h4>Routes</h4><p>Maps URLs to components. /login → Login component. /dashboard → Dashboard component.</p></div>
+  </div>
+</div>
+
+<!-- 4. MySQL -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">4</div><h3>What is MySQL &amp; Database?</h3></div>
+  <div class="concept"><div class="ctitle">🗄️ Database</div><p>A database is like a very organized digital filing cabinet. It stores data in <strong>tables</strong> (like Excel sheets). Each table has rows (records) and columns (fields).</p></div>
+  <div class="concept"><div class="ctitle">🐬 MySQL</div><p>MySQL is a popular database software. It stores data permanently on your hard disk. Even if the computer restarts, all the data is still there.</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>MySQL = a collection of Excel sheets saved permanently on your computer. Each sheet = one table (users_data, pipes, waterpara).</p></div>
+  <div class="concept"><div class="ctitle">🔑 Key Terms</div><p><strong>Primary Key (PK)</strong> — Unique ID for each row. Like a roll number.<br/><strong>Foreign Key (FK)</strong> — Links two tables. pipe's user_id points to users_data's id.<br/><strong>@Entity</strong> — Java class automatically becomes a table in MySQL when app starts.</p></div>
+</div>
+
+<!-- 5. REST API -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">5</div><h3>What is REST API &amp; HTTP?</h3></div>
+  <div class="concept"><div class="ctitle">🌐 HTTP (HyperText Transfer Protocol)</div><p>HTTP is the language browsers use to talk to servers. When you open a website, your browser sends an HTTP request and the server sends back an HTTP response.</p></div>
+  <div class="concept"><div class="ctitle">📡 REST API</div><p>REST API is a set of rules for how the frontend and backend talk to each other. The frontend sends a request to a URL and the backend responds with data (usually in JSON format).</p></div>
+  <table>
+    <thead><tr><th>HTTP Method</th><th>What It Does</th><th>Example in Our Project</th></tr></thead>
+    <tbody>
+      <tr><td>GET</td><td>Fetch / Read data</td><td>GET /api/pipes/user/1 → get all pipes of user 1</td></tr>
+      <tr><td>POST</td><td>Send / Create data</td><td>POST /api/auth/login → send username+password</td></tr>
+      <tr><td>PUT</td><td>Update data</td><td>Update existing record</td></tr>
+      <tr><td>DELETE</td><td>Remove data</td><td>Delete a record</td></tr>
+    </tbody>
+  </table>
+  <div class="analogy"><div class="alabel">Analogy</div><p>REST API = a waiter in a restaurant. Frontend (you) gives the order. Waiter (API) takes it to the kitchen (backend). Kitchen cooks and waiter brings back the food (response).</p></div>
+</div>
+
+<!-- 6. JSON -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">6</div><h3>What is JSON?</h3></div>
+  <div class="concept"><div class="ctitle">📦 JSON (JavaScript Object Notation)</div><p>JSON is the format used to send data between frontend and backend. It looks like this:</p></div>
+  <div class="code-wrap"><div class="code-label">JSON Example — Login request sent from Angular to Spring Boot</div>
+<pre>{
+  <span class="str">"username"</span>: <span class="str">"sagar"</span>,
+  <span class="str">"password"</span>: <span class="str">"pass123"</span>
+}
+
+<span class="cm">// Response from Spring Boot back to Angular:</span>
+{
+  <span class="str">"message"</span>: <span class="str">"Login successful"</span>,
+  <span class="str">"id"</span>: <span class="nm">5</span>
+}</pre>
+  </div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>JSON = a standard form/letter format. Both sender (Angular) and receiver (Spring Boot) know how to read it.</p></div>
+</div>
+
+<!-- 7. JPA/Hibernate -->
+<div class="section pb">
+  <div class="sec-head"><div class="sec-num">7</div><h3>What is JPA / Hibernate?</h3></div>
+  <div class="concept"><div class="ctitle">🔄 JPA (Java Persistence API) + Hibernate</div><p>Normally, to save data to MySQL you write SQL: <code>INSERT INTO users_data (username, email) VALUES ('sagar', 'sagar@x.com')</code>. With JPA + Hibernate, you just call <code>userRepository.save(user)</code> in Java and it automatically writes the SQL for you!</p></div>
+  <div class="concept"><div class="ctitle">✨ Spring Data JPA — Magic Method Names</div><p>You write a method name in a special way and Spring generates the SQL automatically:</p></div>
+  <div class="code-wrap"><div class="code-label">No SQL needed — method name IS the query</div>
+<pre><span class="cm">// You write this method name in your Repository interface:</span>
+List&lt;Pipes&gt; findByUserId(Long userId);
+
+<span class="cm">// Spring automatically generates this SQL:</span>
+<span class="cm">// SELECT * FROM pipes WHERE user_id = ?</span>
+
+<span class="cm">// Another example:</span>
+Optional&lt;Waterpara&gt; findFirstByPipeIdOrderByTimestampDesc(Long pipeId);
+<span class="cm">// SELECT * FROM waterpara WHERE pipe_id=? ORDER BY timestamp DESC LIMIT 1</span></pre>
+  </div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>JPA = a translator. You speak Java, MySQL speaks SQL. JPA translates Java into SQL automatically so you don't have to learn SQL.</p></div>
+</div>
+
+<!-- 8. Spring Security + BCrypt -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">8</div><h3>What is Spring Security &amp; BCrypt?</h3></div>
+  <div class="concept"><div class="ctitle">🛡️ Spring Security</div><p>Spring Security protects your application. It checks every incoming HTTP request: "Is this user allowed to access this URL?" If not logged in, it blocks the request.</p></div>
+  <div class="concept"><div class="ctitle">🔐 BCrypt (Password Hashing)</div><p>BCrypt converts a plain password into an unreadable scrambled string called a hash. This hash cannot be converted back to the original password. Even if someone steals your database, they cannot read the passwords.</p></div>
+  <div class="code-wrap"><div class="code-label">BCrypt example</div>
+<pre><span class="cm">// Original password typed by user:</span>
+<span class="str">"mypassword123"</span>
+
+<span class="cm">// After BCrypt hashing (what gets stored in MySQL):</span>
+<span class="str">"$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"</span>
+
+<span class="cm">// BCrypt does NOT reverse this — it only COMPARES</span>
+<span class="cm">// When user logs in: BCrypt checks if "mypassword123" matches the hash</span>
+passwordEncoder.matches(<span class="str">"mypassword123"</span>, storedHash); <span class="cm">// returns true</span></pre>
+  </div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>BCrypt = a one-way shredder. You can shred paper (hash password) but you cannot un-shred it. You only check if two documents shred the same way.</p></div>
+</div>
+
+<!-- 9. Session -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">9</div><h3>What is Session-Based Authentication?</h3></div>
+  <div class="concept"><div class="ctitle">🎫 Session</div><p>When you login, the server creates a "session" — a unique ticket proving you are logged in. This ticket (SESSIONID) is stored in MySQL and also sent to your browser as a <strong>Cookie</strong>. Every time your browser makes a request, it automatically sends this cookie. The server checks the cookie and knows who you are.</p></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>Login successful</strong><span>Server creates SESSIONID → stores in MySQL spring_session table → sends as cookie to browser</span></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>Next request from browser</strong><span>Browser automatically sends SESSIONID cookie with every request</span></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>Server checks the cookie</strong><span>Looks up SESSIONID in MySQL → finds the user → allows the request</span></div></div>
+    <div class="flow-step"><div class="dot d6">4</div><div class="fc"><strong>Session expires after 30 minutes</strong><span>SESSIONID deleted from MySQL → user must login again</span></div></div>
+  </div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>Session = a wristband at a theme park. You pay once (login), get a wristband (SESSIONID). At every ride (request), staff checks the wristband. After park closes (30 min), wristband is invalid.</p></div>
+</div>
+
+<!-- 10. @Async Thread -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">10</div><h3>What is @Async &amp; Background Thread?</h3></div>
+  <div class="concept"><div class="ctitle">🧵 Thread</div><p>Normally, Java runs code one line at a time — like one worker doing tasks one by one. A Thread is like hiring a second worker who can do a different task at the same time in parallel.</p></div>
+  <div class="concept"><div class="ctitle">⚡ @Async</div><p>@Async tells Spring: "Run this method in a background thread — don't wait for it to finish." Our sensor simulator runs in a background thread every 10 seconds forever. Without @Async, the server would be stuck in the while loop and could never respond to any other requests.</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>@Async = a kitchen timer running in the background. While the timer counts down (sensor generates data), you (the server) can keep taking new orders (handle other requests).</p></div>
+</div>
+
+<!-- 11. CORS -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">11</div><h3>What is CORS?</h3></div>
+  <div class="concept"><div class="ctitle">🌐 CORS (Cross-Origin Resource Sharing)</div><p>CORS is a browser security rule. It says: "You can only talk to the same server you came from." Angular runs on port 4200 and Spring Boot on port 8081 — different ports = different origins. Without CORS config, the browser would BLOCK Angular from talking to Spring Boot.</p></div>
+  <div class="concept"><div class="ctitle">✅ Solution</div><p>We configure Spring Boot to say: "I allow requests from http://localhost:4200 — let them through." This is done in SpringSecurity.java.</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>CORS = a security guard at a building. By default he blocks outsiders. CORS config = telling the guard "let people from building 4200 in."</p></div>
+</div>
+
+<!-- 12. Angular Guard + Interceptor -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">12</div><h3>What is AuthGuard &amp; HTTP Interceptor?</h3></div>
+  <div class="cards c2">
+    <div class="card blue">
+      <div class="ci">🛡️</div>
+      <h4>AuthGuard</h4>
+      <p>Protects pages in Angular. Before loading /home or /dashboard, it checks with the backend "is this user still logged in?" If yes → show page. If no → send to login page. Like a door bouncer.</p>
+    </div>
+    <div class="card orange">
+      <div class="ci">🔗</div>
+      <h4>HTTP Interceptor</h4>
+      <p>Intercepts every HTTP request Angular makes and automatically adds <code>withCredentials: true</code>. This forces the browser to send the SESSIONID cookie. Without this, backend rejects every request as "not logged in".</p>
+    </div>
+  </div>
+</div>
+
+<!-- 13. Chart.js -->
+<div class="section pb">
+  <div class="sec-head"><div class="sec-num">13</div><h3>What is Chart.js?</h3></div>
+  <div class="concept"><div class="ctitle">📊 Chart.js</div><p>Chart.js is a JavaScript library for drawing beautiful charts (line, bar, pie, etc.) in the browser. In our project, we use it to draw a live line chart showing pH, Turbidity, and TDS values over time. We add new data points to the chart every 3 seconds and it updates automatically.</p></div>
+  <div class="analogy"><div class="alabel">Analogy</div><p>Chart.js = a digital graph paper. You give it numbers, it draws the graph for you automatically.</p></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART 2 — PROJECT STRUCTURE
+═══════════════════════════════════════════════════════ -->
+<div class="part-header">
+  <div class="pnum">B</div>
+  <div><h2>PART 2 — Project Structure</h2><p>Every folder, every file — what it does and why it exists</p></div>
+</div>
+
+<!-- Folder Overview -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">14</div><h3>Folder Overview</h3></div>
+  <div class="cards c2">
+    <div>
+      <div class="tree">
+<span class="fo">water/                     </span><span class="co">← Root folder</span>
+├── <span class="fo">backend/</span>               <span class="co">← Spring Boot (Java)</span>
+└── <span class="fo">frontend/</span>              <span class="co">← Angular (TypeScript)</span></div>
+    </div>
+    <div class="card green" style="align-self:start">
+      <div class="ci">💡</div>
+      <h4>Why 2 separate folders?</h4>
+      <p>Backend and frontend are completely separate applications. Backend runs on port 8081. Frontend runs on port 4200. They communicate via HTTP (REST API calls).</p>
+    </div>
+  </div>
+</div>
+
+<!-- Backend Files -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">15</div><h3>Backend Files — Every File Explained</h3></div>
+
+  <table class="ftable">
+    <thead><tr><th>File Name</th><th>What It Does</th><th>Layer</th></tr></thead>
+    <tbody>
+      <tr><td class="fn">MainApp.java</td><td class="fd"><strong>Entry point.</strong> Running this file starts the whole Spring Boot server. Has @SpringBootApplication and @EnableAsync annotations.</td><td class="fl">Entry Point</td></tr>
+      <tr><td class="fn">Application.properties</td><td class="fd"><strong>Configuration file.</strong> Sets the server port (8081), MySQL database URL, username, password, session timeout (30 min). No code — just settings.</td><td class="fl">Config</td></tr>
+      <tr><td class="fn">SpringSecurity.java</td><td class="fd"><strong>Security rules.</strong> Defines which URLs are public (login/register) and which need login. Sets up CORS (allow Angular port 4200). Configures BCrypt for passwords.</td><td class="fl">Security</td></tr>
+      <tr><td class="fn">UsersData.java</td><td class="fd"><strong>User table.</strong> Java class with @Entity annotation. Hibernate reads this and creates the users_data table in MySQL. Has id, username, email, password fields.</td><td class="fl">Model</td></tr>
+      <tr><td class="fn">Pipes.java</td><td class="fd"><strong>Pipe table.</strong> Represents a water pipe. Has id, pipeName, location. Links to UsersData with @ManyToOne (many pipes can belong to one user).</td><td class="fl">Model</td></tr>
+      <tr><td class="fn">Waterpara.java</td><td class="fd"><strong>Readings table.</strong> Stores every sensor reading. Has ph, turbidity, tds, status (SAFE/DANGER), timestamp. Links to Pipes with @ManyToOne.</td><td class="fl">Model</td></tr>
+      <tr><td class="fn">UserDataDTO.java</td><td class="fd"><strong>Register data shape.</strong> DTO = Data Transfer Object. Used to receive registration form data (username, email, password) from Angular. Keeps the API clean.</td><td class="fl">DTO</td></tr>
+      <tr><td class="fn">LogindataDTO.java</td><td class="fd"><strong>Login data shape.</strong> Receives login form data (username, password) from Angular.</td><td class="fl">DTO</td></tr>
+      <tr><td class="fn">AuthController.java</td><td class="fd"><strong>Login/Register/Logout API.</strong> Handles /api/auth/register, /api/auth/login, /api/auth/logout, /api/auth/me. Uses UserService and Spring Security to process requests.</td><td class="fl">Controller</td></tr>
+      <tr><td class="fn">PipeController.java</td><td class="fd"><strong>Pipe API.</strong> Handles adding a new pipe (/api/pipes/add/{userId}) and getting all pipes of a user (/api/pipes/user/{userId}).</td><td class="fl">Controller</td></tr>
+      <tr><td class="fn">SimulatorController.java</td><td class="fd"><strong>Sensor/Simulator API.</strong> Handles start/stop simulation, get latest reading, get history — for both user-level and pipe-level.</td><td class="fl">Controller</td></tr>
+      <tr><td class="fn">UserService.java</td><td class="fd"><strong>Registration logic.</strong> Checks if username/email exists. Hashes password with BCrypt. Saves new user to MySQL via UserRepository.</td><td class="fl">Service</td></tr>
+      <tr><td class="fn">SensorSimulatorService.java</td><td class="fd"><strong>The heart of the project.</strong> Runs a background @Async thread. Every 10 seconds, generates random pH/Turbidity/TDS values, checks WHO standards, sets SAFE/DANGER, saves to MySQL.</td><td class="fl">Service</td></tr>
+      <tr><td class="fn">CustomUserDetailsService.java</td><td class="fd"><strong>Used by Spring Security during login.</strong> When login is attempted, Spring Security calls this to load the user from MySQL by username. Returns UserDetails object with username + hashed password.</td><td class="fl">Service</td></tr>
+      <tr><td class="fn">UserRepository.java</td><td class="fd"><strong>User database queries.</strong> Interface extending JpaRepository. Has existsByUsername(), existsByEmail(), findByUsername() — Spring generates SQL automatically.</td><td class="fl">Repository</td></tr>
+      <tr><td class="fn">PipeRepository.java</td><td class="fd"><strong>Pipe database queries.</strong> Has findByUserId() → SELECT * FROM pipes WHERE user_id = ?</td><td class="fl">Repository</td></tr>
+      <tr><td class="fn">WaterRepository.java</td><td class="fd"><strong>Readings database queries.</strong> Has methods to get latest reading, get history — by pipe or by user. Spring generates all SQL from method names.</td><td class="fl">Repository</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Frontend Files -->
+<div class="section pb">
+  <div class="sec-head"><div class="sec-num">16</div><h3>Frontend Files — Every File Explained</h3></div>
+
+  <table class="ftable">
+    <thead><tr><th>File Name</th><th>What It Does</th><th>Type</th></tr></thead>
+    <tbody>
+      <tr><td class="fn">app.routes.ts</td><td class="fd"><strong>URL routing.</strong> Maps URLs to components. /login → Login. /home → Home (protected). /dashboard → Dashboard (protected). Default URL → redirect to /login.</td><td class="fl">Config</td></tr>
+      <tr><td class="fn">app.config.ts</td><td class="fd"><strong>App-level setup.</strong> Registers the HTTP interceptor, sets up routing, configures Angular providers.</td><td class="fl">Config</td></tr>
+      <tr><td class="fn">login.ts + login.html</td><td class="fd"><strong>Login page.</strong> Shows the login form. On submit, calls AuthService.login(). Stores userId in localStorage. Navigates to /home on success.</td><td class="fl">Component</td></tr>
+      <tr><td class="fn">registration.ts + registration.html</td><td class="fd"><strong>Registration page.</strong> Shows the register form. On submit, calls AuthService.register(). Shows success or error message.</td><td class="fl">Component</td></tr>
+      <tr><td class="fn">home.ts + home.html</td><td class="fd"><strong>Home/Welcome page.</strong> Shows username and a 30-minute session countdown timer. Has "Open Dashboard" and "Learn More" buttons. Auto-logout when timer hits 0.</td><td class="fl">Component</td></tr>
+      <tr><td class="fn">dashboard.ts + dashboard.html</td><td class="fd"><strong>Main monitoring page.</strong> Shows pipe tabs, add pipe form, Start/Stop button, 4 metric cards (pH, Turbidity, TDS, Status), and a live Chart.js line chart with 3 lines.</td><td class="fl">Component</td></tr>
+      <tr><td class="fn">auth.ts (service)</td><td class="fd"><strong>Authentication HTTP calls.</strong> Makes HTTP requests to /api/auth/register, /api/auth/login, /api/auth/logout, /api/auth/me. Returns Observable (async result).</td><td class="fl">Service</td></tr>
+      <tr><td class="fn">simulator.ts (service)</td><td class="fd"><strong>Pipe + Sensor HTTP calls.</strong> Makes HTTP requests to /api/pipes and /api/simulator. Handles get pipes, add pipe, start/stop simulation, get latest, get history.</td><td class="fl">Service</td></tr>
+      <tr><td class="fn">auth.guard.ts</td><td class="fd"><strong>Page protector.</strong> Runs before /home and /dashboard load. Calls AuthService.me() to verify session. If session valid → allow. If invalid → redirect to /login.</td><td class="fl">Guard</td></tr>
+      <tr><td class="fn">session.interceptor.ts</td><td class="fd"><strong>Cookie sender.</strong> Intercepts every single HTTP request. Adds withCredentials:true so the browser sends the SESSIONID cookie. Without this, every request fails authentication.</td><td class="fl">Interceptor</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Database Structure -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">17</div><h3>Database Structure — 3 Tables + How They Connect</h3></div>
+  <div class="cards c3">
+    <div class="card blue"><div class="ci">👤</div><h4>users_data</h4><p><strong>id</strong> (PK, auto)<br/><strong>username</strong> (unique)<br/><strong>email</strong><br/><strong>password</strong> (BCrypt hash)</p></div>
+    <div class="card green"><div class="ci">🔩</div><h4>pipes</h4><p><strong>id</strong> (PK, auto)<br/><strong>pipe_name</strong><br/><strong>location</strong><br/><strong>user_id</strong> (FK → users_data)</p></div>
+    <div class="card purple"><div class="ci">💧</div><h4>waterpara</h4><p><strong>id</strong> (PK, auto)<br/><strong>ph, turbidity, tds</strong><br/><strong>status</strong> (SAFE/DANGER)<br/><strong>timestamp</strong><br/><strong>pipe_id</strong> (FK → pipes)</p></div>
+  </div>
+  <div class="hl green"><strong>Chain:</strong> One USER → owns many PIPES → each PIPE has many WATER READINGS. This is called a One-to-Many relationship.</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART 3 — COMPLETE FLOW
+═══════════════════════════════════════════════════════ -->
+<div class="part-header pb">
+  <div class="pnum">C</div>
+  <div><h2>PART 3 — Complete Project Flow</h2><p>Step-by-step from Registration all the way to Live Chart — with every file involved</p></div>
+</div>
+
+<!-- FLOW 1: Registration -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">18</div><h3>Flow 1 — Registration (New User Signs Up)</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>User opens app → goes to /register page</strong><span>app.routes.ts sends /register URL to Registration component</span><div class="ffile">frontend/src/app/registration/registration.html</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>User fills Username, Email, Password → clicks Submit</strong><span>onsubmit() in registration.ts is called. Calls AuthService.register(formData)</span><div class="ffile">frontend/src/app/registration/registration.ts</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>AuthService sends: POST http://localhost:8081/api/auth/register</strong><span>JSON body with username, email, password is sent to the backend</span><div class="ffile">frontend/src/app/service/auth.ts</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>AuthController @PostMapping("/register") receives it</strong><span>Passes the data to UserService.register()</span><div class="ffile">backend/.../controller/AuthController.java</div></div></div>
+    <div class="flow-step"><div class="dot d5">5</div><div class="fc"><strong>UserService checks: username or email already exists?</strong><span>UserRepository.existsByUsername() → If yes → throw error → Angular shows "Username already exists"</span><div class="ffile">backend/.../service/UserService.java</div></div></div>
+    <div class="flow-step"><div class="dot d6">6</div><div class="fc"><strong>Password is hashed using BCrypt</strong><span>"pass123" → "$2a$10$xyz..." — the original password is NEVER stored in the database</span><div class="ffile">backend/.../service/UserService.java</div></div></div>
+    <div class="flow-step"><div class="dot d7">7</div><div class="fc"><strong>userRepository.save(user) → INSERT into users_data table</strong><span>New row created in MySQL with hashed password</span><div class="ffile">backend/.../repository/UserRepository.java</div></div></div>
+    <div class="flow-step"><div class="dot d8">8</div><div class="fc"><strong>Response: "User registered successfully!" → shown on screen</strong><span>User can now go to login page</span><div class="ffile">frontend/src/app/registration/registration.ts</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 2: Login -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">19</div><h3>Flow 2 — Login</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>User enters Username + Password → clicks Login</strong><span>onsubmit() calls AuthService.login(formData)</span><div class="ffile">frontend/src/app/login/login.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>Angular sends: POST http://localhost:8081/api/auth/login</strong><span>Session interceptor automatically adds withCredentials:true to the request</span><div class="ffile">frontend/src/app/service/auth.ts &amp; interceptors/session.interceptor.ts</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>Spring Security calls CustomUserDetailsService.loadUserByUsername()</strong><span>Loads the user from MySQL. Gets the stored BCrypt hash password.</span><div class="ffile">backend/.../service/CustomUserDetailsService.java</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>BCrypt compares: does "pass123" match the stored hash?</strong><span>If YES → authentication success. If NO → AuthenticationException → "Invalid username or password"</span><div class="ffile">backend/.../config/SpringSecurity.java</div></div></div>
+    <div class="flow-step"><div class="dot d5">5</div><div class="fc"><strong>Session created → saved in MySQL spring_session table</strong><span>SESSIONID cookie is sent back to the browser. Session valid for 30 minutes.</span><div class="ffile">backend/.../controller/AuthController.java</div></div></div>
+    <div class="flow-step"><div class="dot d6">6</div><div class="fc"><strong>Response: &#123; message: "Login successful", id: 5 &#125;</strong><span>Angular stores userId in localStorage: localStorage.setItem('userId', '5')</span><div class="ffile">frontend/src/app/login/login.ts</div></div></div>
+    <div class="flow-step"><div class="dot d7">7</div><div class="fc"><strong>Navigate to /home page</strong><span>router.navigate(['/home']) with username and expiry time passed as state</span><div class="ffile">frontend/src/app/login/login.ts</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 3: AuthGuard -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">20</div><h3>Flow 3 — Route Protection (Every Time You Navigate)</h3></div>
+  <p>Every time you navigate to /home or /dashboard, Angular runs AuthGuard FIRST before showing the page.</p>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>User tries to go to /home or /dashboard</strong><span>app.routes.ts sees canActivate: [AuthGuard] is set on these routes</span><div class="ffile">frontend/src/app/app.routes.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>AuthGuard calls GET /api/auth/me</strong><span>Sends the SESSIONID cookie (interceptor adds it automatically)</span><div class="ffile">frontend/src/app/guards/auth.guard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>Backend checks: is this SESSIONID valid in MySQL?</strong><span>AuthController.me() → checks SecurityContext → finds the logged-in user</span><div class="ffile">backend/.../controller/AuthController.java</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>If valid → show the page. If invalid → redirect to /login</strong><span>Session expired or not logged in → localStorage.clear() → router.navigate(['/login'])</span><div class="ffile">frontend/src/app/guards/auth.guard.ts</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 4: Dashboard -->
+<div class="section pb">
+  <div class="sec-head"><div class="sec-num">21</div><h3>Flow 4 — Dashboard Loads</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>Dashboard component initialises (ngOnInit)</strong><span>Gets userId from localStorage. Calls loadPipes(userId).</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>GET /api/pipes/user/{userId} → load all pipes of this user</strong><span>PipeController returns list of pipes → shown as tabs on the dashboard nav</span><div class="ffile">backend/.../controller/PipeController.java</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>First pipe is auto-selected → load its history</strong><span>GET /api/simulator/history/pipe/{pipeId} → last 15 readings pre-fill the chart</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>Chart.js renders the line chart with 3 datasets</strong><span>Dataset 0: pH (left Y-axis). Dataset 1: Turbidity (left Y-axis). Dataset 2: TDS (right Y-axis).</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts — initChart()</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 5: Add Pipe -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">22</div><h3>Flow 5 — Adding a Pipe</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>User clicks "+ Add Line" → fills pipe name + location → Save</strong><span>submitAddPipe() called in dashboard.ts</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>POST /api/pipes/add/{userId} with &#123; pipeName, location &#125;</strong><span>SimulatorService sends request to backend</span><div class="ffile">frontend/src/app/service/simulator.ts</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>PipeController finds the user, links pipe to user, saves</strong><span>userRepository.findById(userId) → pipe.setUser(user) → pipeRepository.save(pipe) → INSERT into pipes</span><div class="ffile">backend/.../controller/PipeController.java</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>Pipe appears as a new tab on the dashboard</strong><span>loadPipes() called again → refreshes the pipe list shown as tabs in nav</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 6: Simulation -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">23</div><h3>Flow 6 — Start Monitoring (Simulation) — Most Important!</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>User clicks "▶ Start Simulator"</strong><span>toggleSimulator() runs. Calls SimulatorService.start(userId).</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>POST /api/simulator/start/{userId} sent to backend</strong><span>SimulatorController receives it, calls SensorSimulatorService.start(userId)</span><div class="ffile">backend/.../controller/SimulatorController.java</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>@Async starts a background thread — API responds immediately</strong><span>userSimulations.put(userId, true) — marks this user as "running"</span><div class="ffile">backend/.../service/SensorSimulatorService.java</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>Background thread: fetch all pipes for this user</strong><span>pipeRepository.findByUserId(userId) → gets "Pipe A", "Pipe B", etc.</span><div class="ffile">backend/.../service/SensorSimulatorService.java</div></div></div>
+    <div class="flow-step"><div class="dot d5">5</div><div class="fc"><strong>For each pipe: generate random sensor data</strong><span>pH = 6.0 + random*3.0 → (6.0 to 9.0) | Turbidity = random*7 → (0 to 7) | TDS = 150+random*500 → (150 to 650)</span><div class="ffile">backend/.../service/SensorSimulatorService.java — generateAndSave()</div></div></div>
+    <div class="flow-step"><div class="dot d6">6</div><div class="fc"><strong>WHO standard check → set SAFE or DANGER</strong><span>pH 6.5–8.5 AND Turbidity ≤5 AND TDS ≤500 → "SAFE". Even one fails → "DANGER".</span><div class="ffile">backend/.../service/SensorSimulatorService.java</div></div></div>
+    <div class="flow-step"><div class="dot d7">7</div><div class="fc"><strong>waterRepository.saveAndFlush(data) → saved to MySQL</strong><span>New row added to waterpara table. Then Thread.sleep(10000) → wait 10 seconds → repeat from step 4.</span><div class="ffile">backend/.../repository/WaterRepository.java</div></div></div>
+    <div class="flow-step"><div class="dot d8">8</div><div class="fc"><strong>Frontend starts polling every 3 seconds</strong><span>setInterval → GET /api/simulator/latest/pipe/{pipeId} → gets newest reading → updates metric cards + chart</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts — pollPipe()</div></div></div>
+  </div>
+
+  <div class="filepath">backend/src/main/java/com/project/watermonitor/service/SensorSimulatorService.java</div>
+  <div class="code-wrap"><div class="code-label">The complete simulation loop — simplified</div>
+<pre><span class="an">@Async</span>  <span class="cm">// Run in background thread</span>
+<span class="kw">public void</span> <span class="mt">start</span>(Long userId) {
+    userSimulations.put(userId, <span class="kw">true</span>); <span class="cm">// Mark as running</span>
+
+    <span class="kw">while</span> (userSimulations.get(userId)) { <span class="cm">// Loop until Stop is clicked</span>
+        List&lt;Pipes&gt; pipes = pipeRepository.findByUserId(userId);
+        <span class="kw">for</span> (Pipes pipe : pipes) {
+            <span class="kw">double</span> ph   = <span class="nm">6.0</span> + Math.random() * <span class="nm">3.0</span>;  <span class="cm">// 6.0 – 9.0</span>
+            <span class="kw">double</span> turb = Math.random() * <span class="nm">7.0</span>;          <span class="cm">// 0   – 7.0</span>
+            <span class="kw">double</span> tds  = <span class="nm">150</span> + Math.random() * <span class="nm">500</span>;  <span class="cm">// 150 – 650</span>
+
+            <span class="kw">boolean</span> safe = (ph&gt;=<span class="nm">6.5</span> &amp;&amp; ph&lt;=<span class="nm">8.5</span>) &amp;&amp; turb&lt;=<span class="nm">5</span> &amp;&amp; tds&lt;=<span class="nm">500</span>;
+            data.setStatus(safe ? <span class="str">"SAFE"</span> : <span class="str">"DANGER"</span>);
+            waterRepository.saveAndFlush(data); <span class="cm">// Save to MySQL</span>
+        }
+        Thread.sleep(<span class="nm">10000</span>); <span class="cm">// Wait 10 seconds</span>
+    }
+}
+
+<span class="kw">public void</span> <span class="mt">stop</span>(Long userId) {
+    userSimulations.put(userId, <span class="kw">false</span>); <span class="cm">// While loop exits</span>
+}</pre>
+  </div>
+</div>
+
+<!-- FLOW 7: Live Chart -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">24</div><h3>Flow 7 — Live Chart Updates</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>setInterval runs every 3 seconds (frontend)</strong><span>Calls pollPipe(pipeId) repeatedly</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>GET /api/simulator/latest/pipe/{pipeId}</strong><span>Backend returns latest waterpara row for this pipe</span><div class="ffile">backend/.../controller/SimulatorController.java</div></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>addDataToChart(data) — adds new point to Chart.js</strong><span>time label pushed. ph, turbidity, tds values pushed to their datasets. If chart has 15+ points, oldest is removed.</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>chart.update() — chart redraws with new data</strong><span>User sees the line move live on screen. Metric cards (pH, Turbidity, TDS, Status) also update.</span><div class="ffile">frontend/src/app/dashboard/dashboard.ts</div></div></div>
+  </div>
+</div>
+
+<!-- FLOW 8: Stop + Logout -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">25</div><h3>Flow 8 — Stop &amp; Logout</h3></div>
+  <div class="cards c2">
+    <div class="card red">
+      <div class="ci">⏹️</div>
+      <h4>Stop Simulation</h4>
+      <p>User clicks "Stop Simulator"<br/>→ clearInterval (stop polling)<br/>→ POST /api/simulator/stop/{userId}<br/>→ userSimulations.put(userId, false)<br/>→ while loop exits → thread terminates<br/>→ No more inserts to waterpara</p>
+    </div>
+    <div class="card orange">
+      <div class="ci">🚪</div>
+      <h4>Logout</h4>
+      <p>User clicks Logout<br/>→ POST /api/auth/logout<br/>→ SecurityContextLogoutHandler invalidates session<br/>→ DELETE from spring_session in MySQL<br/>→ localStorage.clear()<br/>→ Navigate to /login</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLETE FLOW TABLE -->
+<div class="section pb">
+  <div class="sec-head"><div class="sec-num">26</div><h3>Complete Flow — One Table (All 10 Steps)</h3></div>
+  <table>
+    <thead><tr><th>Step</th><th>User Action</th><th>Frontend</th><th>Backend</th><th>MySQL</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Open app</td><td>Routes to /login</td><td>—</td><td>—</td></tr>
+      <tr><td>2</td><td>Register</td><td>registration.ts → auth.ts</td><td>AuthController → UserService → BCrypt</td><td>INSERT users_data</td></tr>
+      <tr><td>3</td><td>Login</td><td>login.ts → auth.ts</td><td>Spring Security → BCrypt check → session</td><td>INSERT spring_session</td></tr>
+      <tr><td>4</td><td>Navigate to /home</td><td>AuthGuard → /api/auth/me</td><td>Validate session cookie</td><td>SELECT spring_session</td></tr>
+      <tr><td>5</td><td>Go to Dashboard</td><td>AuthGuard + loadPipes()</td><td>PipeController.getPipes()</td><td>SELECT pipes</td></tr>
+      <tr><td>6</td><td>Add a pipe</td><td>dashboard.ts → simulator.ts</td><td>PipeController.addPipe()</td><td>INSERT pipes</td></tr>
+      <tr><td>7</td><td>Start Simulator</td><td>dashboard.ts → simulator.ts</td><td>@Async background thread starts</td><td>INSERT waterpara every 10s</td></tr>
+      <tr><td>8</td><td>Chart updates live</td><td>setInterval polls every 3s</td><td>SimulatorController.getLatestByPipe()</td><td>SELECT latest waterpara</td></tr>
+      <tr><td>9</td><td>Stop Simulator</td><td>clearInterval + stop()</td><td>userSimulations = false → loop exits</td><td>No more inserts</td></tr>
+      <tr><td>10</td><td>Logout</td><td>auth.ts.logout()</td><td>Invalidate session</td><td>DELETE spring_session</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PART 4 — DEMO DAY
+═══════════════════════════════════════════════════════ -->
+<div class="part-header">
+  <div class="pnum">D</div>
+  <div><h2>PART 4 — Demo Day Preparation</h2><p>What to say, what to show, and how to answer questions</p></div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><div class="sec-num">27</div><h3>60-Second Project Pitch — Say This</h3></div>
+  <div class="tip">
+    <h4>Say exactly this:</h4>
+    <ul>
+      <li>"This is a <strong>Water Quality Monitoring System</strong> built using <strong>Spring Boot</strong> for the backend, <strong>Angular</strong> for the frontend, and <strong>MySQL</strong> as the database."</li>
+      <li>"Users can <strong>register and login</strong> securely. Passwords are hashed with <strong>BCrypt</strong>. Sessions are stored in MySQL and last 30 minutes."</li>
+      <li>"On the dashboard, users add water pipes. Then click <strong>Start Simulator</strong> — this triggers an <strong>@Async background thread</strong> that generates sensor data every 10 seconds for each pipe."</li>
+      <li>"It checks <strong>3 parameters — pH, Turbidity, and TDS</strong> — against <strong>WHO safety standards</strong> and marks each reading as <strong>SAFE or DANGER</strong>."</li>
+      <li>"The Angular dashboard shows a <strong>live Chart.js graph</strong> with 3 lines. It polls the backend every 3 seconds. Dual Y-axis — pH/Turbidity on left, TDS on right."</li>
+      <li>"Pages are protected by <strong>AuthGuard</strong> and an HTTP Interceptor sends the session cookie automatically."</li>
+    </ul>
+  </div>
+
+  <div class="sec-head" style="margin-top:20px"><div class="sec-num">28</div><h3>Demo Order — Show It Like This</h3></div>
+  <div class="flow">
+    <div class="flow-step"><div class="dot d1">1</div><div class="fc"><strong>Show Registration page → fill form → submit</strong><span>Show "User registered successfully" message</span></div></div>
+    <div class="flow-step"><div class="dot d2">2</div><div class="fc"><strong>Show Login page → login → home page loads</strong><span>Point out the 30-minute session countdown timer</span></div></div>
+    <div class="flow-step"><div class="dot d3">3</div><div class="fc"><strong>Click "Open Dashboard" → dashboard loads with pipes</strong><span>Show pipe tabs at the top</span></div></div>
+    <div class="flow-step"><div class="dot d4">4</div><div class="fc"><strong>Click "+ Add Line" → add a new pipe → show it appears as tab</strong><span>Explain it gets saved to MySQL</span></div></div>
+    <div class="flow-step"><div class="dot d5">5</div><div class="fc"><strong>Click "▶ Start Simulator" → chart starts updating live</strong><span>Point out all 3 lines (pH blue, Turbidity cyan, TDS purple). Show the metric cards updating.</span></div></div>
+    <div class="flow-step"><div class="dot d6">6</div><div class="fc"><strong>Wait for a DANGER reading — show red banner if it appears</strong><span>Explain WHO standards and how the status is determined</span></div></div>
+    <div class="flow-step"><div class="dot d7">7</div><div class="fc"><strong>Click "Stop Simulator" → click "🏠 Home" → click Logout</strong><span>Show redirect back to login — session cleared</span></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-head"><div class="sec-num">29</div><h3>Top 8 Questions They May Ask</h3></div>
+
+  <div class="qa"><div class="qa-q">Q: What does @SpringBootApplication do?</div>
+  <div class="qa-a">It is placed on the main class (MainApp.java). It combines 3 annotations: @Configuration (app setup), @EnableAutoConfiguration (auto-configure Spring), @ComponentScan (find all controllers/services). Running this class starts the embedded Tomcat server on port 8081.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: What is a DTO and why do you use it?</div>
+  <div class="qa-a">DTO = Data Transfer Object. It is a simple class used to receive data from the frontend. For example, UserDataDTO has only username, email, password — it does not expose all fields of the UsersData entity. It keeps the API clean and secure.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: Why use BCrypt for passwords?</div>
+  <div class="qa-a">BCrypt converts plain passwords into irreversible hashes. Even if someone steals the database, they cannot reverse the hash to get original passwords. BCrypt also adds a random "salt" so the same password gives a different hash each time, preventing rainbow table attacks.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: What is @Async and why is it needed in the simulator?</div>
+  <div class="qa-a">@Async makes a method run in a separate background thread. The simulator has a while loop running forever (every 10 seconds). Without @Async, the POST /start request would never respond — the server would be stuck in the loop forever. With @Async, the loop runs in background and the API responds immediately.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: Why is the session stored in MySQL instead of server memory?</div>
+  <div class="qa-a">If sessions are stored in server memory and the server restarts, all users are logged out. Storing sessions in MySQL (spring_session table) means sessions survive restarts. Configured via spring.session.store-type=jdbc in Application.properties.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: How does Spring Data JPA work without writing SQL?</div>
+  <div class="qa-a">Spring Data JPA reads the method name and generates SQL at runtime. Example: findFirstByPipeIdOrderByTimestampDesc → "SELECT * FROM waterpara WHERE pipe_id=? ORDER BY timestamp DESC LIMIT 1". The keywords (findBy, First, OrderBy, Desc) are parsed into SQL automatically.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: What does the Session Interceptor do?</div>
+  <div class="qa-a">Angular does not send cookies by default due to browser security. The HTTP Interceptor clones every outgoing request and adds withCredentials:true, which tells the browser to send the SESSIONID cookie automatically with every request. Without this, every backend call is rejected as unauthenticated.</div></div>
+
+  <div class="qa"><div class="qa-q">Q: Why does the chart have two Y-axes?</div>
+  <div class="qa-a">pH ranges from 6–9 and Turbidity from 0–7 (small values). TDS ranges from 150–650 (large values). If we used one Y-axis scaled to 650, pH and Turbidity lines would appear flat at the bottom. Dual Y-axis: left axis (0–14) for pH and Turbidity, right axis (0–700) for TDS — all 3 lines visible clearly.</div></div>
+</div>
+
+<!-- FOOTER -->
+<div style="background:#0c1445;color:white;padding:20px 50px;text-align:center;font-size:11px;opacity:0.9;">
+  Water Quality Monitoring System &nbsp;|&nbsp; Spring Boot + Angular + MySQL &nbsp;|&nbsp; Complete Beginner Guide &nbsp;|&nbsp; All the best for your Demo! 💧
+</div>
+
+</div>
+</body>
+</html>
